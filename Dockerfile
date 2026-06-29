@@ -1,5 +1,5 @@
 # Use the official lightweight Nginx image
-FROM nginx:alpine
+FROM public.ecr.aws/nginx/nginx:alpine
 
 # Copy all the static website files into the Nginx public folder
 COPY . /usr/share/nginx/html/

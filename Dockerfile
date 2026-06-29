@@ -1,11 +1,16 @@
-# Use the official lightweight Nginx image
 FROM public.ecr.aws/nginx/nginx:alpine
 
-# Copy all the static website files into the Nginx public folder
+# 1. Clean out any default Nginx website files
+RUN rm -rf /usr/share/nginx/html/*
+
+# 2. Copy your bike website files into the container
+# If your files are in the root of the repo, use this:
 COPY . /usr/share/nginx/html/
 
-# Expose port 80 to allow traffic to the web server
+# NOTE: If your HTML/CSS files are inside a subfolder in git (like 'public' or 'src'), 
+# change the line above to point to that folder instead, for example:
+# COPY ./your-folder-name/ /usr/share/nginx/html/
+
 EXPOSE 80
 
-# Start Nginx when the container launches
 CMD ["nginx", "-g", "daemon off;"]
